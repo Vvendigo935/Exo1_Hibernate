@@ -29,18 +29,25 @@ public class Main {
 //        int idSearch = scanner.nextInt();
 //        Product foundProduct = productDAO.get(scanner.nextInt());
 
-        Product foundProduct = productDAO.get(2);
-        System.out.println(foundProduct.toString());
+//        Product foundProduct = productDAO.get(2);
+//        foundProduct.setBuyDate(new Date (2020,10,10));
+//        System.out.println(foundProduct.toString());
 
 //        foundProduct = productDAO.get(3);
 //        productDAO.delete(foundProduct);
 //
 //        foundProduct = productDAO.get(1);
 //        foundProduct.setBrand("En fait c'est une Renault mdr");
+//        productDAO.save(foundProduct);
+
+
+        System.out.println(productDAO.getAllProduct());
+
+        System.out.println(productDAO.getPriceOver100());
+
+        System.out.println(productDAO.getDatebtw()); // j'ai eu des problèmes avec la date (le fameux an de grace 3924)
 
 
 
-
-        
     }
 }
