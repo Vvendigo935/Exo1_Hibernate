@@ -1,51 +1,52 @@
 package Exercice1Hibernate;
 
+import net.bytebuddy.asm.Advice;
 import Exercice1Hibernate.dao.ProductDAO;
 import Exercice1Hibernate.entity.Product;
-import Exercice1Hibernate.util.SessionFactorySingleton;
 
-import java.util.Date;
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.List;
 
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        ProductDAO productDAO = new ProductDAO();
 
-        ProductDAO productDAO = new ProductDAO(SessionFactorySingleton.getSession());
+        Product product1 = Product.builder().brand("Brand1").reference("12za8e1aze").purchaseDate(LocalDate.now()).price(12.5).stock(200).build();
+        Product product2 = Product.builder().brand("Brand1").reference("aze121azex").purchaseDate(LocalDate.now()).price(120.5).stock(20).build();
+        Product product3 = Product.builder().brand("Brand3").reference("az87e74a1z").purchaseDate(LocalDate.now()).price(2.5).stock(500).build();
+        Product product4 = Product.builder().brand("Brand4").reference("aze5445aez").purchaseDate(LocalDate.now()).price(18).stock(20).build();
+        Product product5 = Product.builder().brand("Brand2").reference("hbfg1h741e").purchaseDate(LocalDate.now()).price(3).stock(1000).build();
 
-        Product product1 = Product.builder().brand("Peugeot").reference("206").buyDate(new Date(2000,11,11)).price(19999.99).stock(3).build();
-        Product product2 = Product.builder().brand("Warhammer 40.000 : DARKTIDE").reference("FatShark.343").buyDate(new Date(2023,10,24)).price(44.99).stock(78).build();
-        Product product3 = Product.builder().brand("JBL").reference("Yamal.8-2").buyDate(new Date(2025,05,19)).price(8.2).stock(10).build();
-        Product product4 = Product.builder().brand("Ravager").reference("BeaupletHQ").buyDate(new Date(2025,01,01)).price(50).stock(141).build();
-        Product product5 = Product.builder().brand("BIC").reference("Stylo.p60t8910").buyDate(new Date(2024,07,20)).price(4).stock(1452).build();
-
-//        productDAO.save(product1);
-//        productDAO.save(product2);
-//        productDAO.save(product3);
-//        productDAO.save(product4);
-//        productDAO.save(product5);
-
-//        System.out.println("Mettez l'id du produit recherché : ");
-//        int idSearch = scanner.nextInt();
-//        Product foundProduct = productDAO.get(scanner.nextInt());
-
-//        Product foundProduct = productDAO.get(2);
-//        foundProduct.setBuyDate(new Date (2020,10,10));
-//        System.out.println(foundProduct.toString());
-
-//        foundProduct = productDAO.get(3);
-//        productDAO.delete(foundProduct);
+//        List<Product> products = List.of(product1,product2,product3,product4,product5);
 //
-//        foundProduct = productDAO.get(1);
-//        foundProduct.setBrand("En fait c'est une Renault mdr");
-//        productDAO.save(foundProduct);
+//        for(Product p : products){
+//            productDAO.save(p);
+//        }
+//
+//        Product productShow = productDAO.get(2);
+//        System.out.println("Product id : 2");
+//        System.out.println(productShow);
+//
+//        System.out.println("delete :");
+//        System.out.println(productDAO.delete(3));
+//
+//        Product productEdit = productDAO.get(1);
+//
+//        System.out.println("product Befor Edit :");
+//        System.out.println(productEdit);
+//
+//        productEdit.setReference("4a6f1ds21sq32f1sq");
+//        productEdit.setPurchaseDate(LocalDate.now());
+//
+//        productDAO.save(productEdit);
+//
+//        System.out.println("product after Edit :");
+//        System.out.println(productEdit);
 
 
-        System.out.println(productDAO.getAllProduct());
 
-        System.out.println(productDAO.getPriceOver100());
-
-        System.out.println(productDAO.getDatebtw()); // j'ai eu des problèmes avec la date (le fameux an de grace 3924)
 
 
 
