@@ -61,7 +61,7 @@ public class Main {
         // Exo 3 partie 2
 
   //      productDAO.getAllStockValue("Brand1");
-        System.out.println(productDAO.getAllBrandValue("Brand1"));
+//    System.out.println(productDAO.getAllBrandValue("Brand1"));
         System.out.println(productDAO.getAvgPrice());
 
 

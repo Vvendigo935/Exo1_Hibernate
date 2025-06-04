@@ -70,29 +70,30 @@ public class ProductDAO extends BaseDAO<Product> {
         }
     }
 
-    public List<Product> getAllBrandValue(String brand){
+    public long getAllBrandValue(String brand){
 
         try{
             session = sessionFactory.openSession();
-            TypedQuery<Product> query = session.createQuery("select SUM(price) as total from Product p where p.brand = ':brand'", Product.class);
+            TypedQuery<Product> query = session.createQuery("select SUM(price) as total from Product p where p.brand = :brand", Product.class);
             query.setParameter("brand",brand);
-            return query.getResultList();
+            return query.getFirstResult();
         }catch (Exception ex){
-            return new ArrayList<>();
+            return session.createQuery("select SUM(price) as totalForThisBrand from Product p WHERE p.brand = :brand", Long.class).getSingleResult();
         }finally {
             session.close();
         }
 
     }
-    public Product getAvgPrice(){
+    public double getAvgPrice(){
 
+  //      return session.createQuery("select AVG(price) from Product p", Double.class).getSingleResult();
         try{
             session = sessionFactory.openSession();
             TypedQuery<Product> query = session.createQuery("select AVG(price) from Product p", Product.class);
 
-            return query.getSingleResult();
+            return query.getFirstResult();
         }catch (Exception ex){
-            return new ArrayList<>();
+            return session.createQuery("select AVG(price) from Product p", Double.class).getSingleResult();
         }finally {
             session.close();
         }
