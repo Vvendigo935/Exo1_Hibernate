@@ -5,10 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,12 +16,18 @@ import java.time.LocalDate;
 @Builder
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String brand;
     private String reference;
     private LocalDate purchaseDate;
     private double price;
     private int stock;
+
+@OneToMany(mappedBy = "product")
+    private List<Picture>pictures;
+
+@OneToMany(mappedBy = "product")
+    private List<Comment>comments;
 
 }

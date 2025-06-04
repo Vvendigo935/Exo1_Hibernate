@@ -1,11 +1,18 @@
 package Exercice1Hibernate;
 
 
+import Exercice1Hibernate.dao.BaseDAO;
+import Exercice1Hibernate.dao.CommentDAO;
+import Exercice1Hibernate.dao.PictureDAO;
 import Exercice1Hibernate.dao.ProductDAO;
+import Exercice1Hibernate.entity.Comment;
+import Exercice1Hibernate.entity.Picture;
 import Exercice1Hibernate.entity.Product;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,6 +20,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         ProductDAO productDAO = new ProductDAO();
+        PictureDAO pictureDAO = new PictureDAO();
+        CommentDAO commentDAO = new CommentDAO();
         Scanner scanner = new Scanner(System.in);
 
         // exo 1
@@ -62,8 +71,38 @@ public class Main {
 
   //      productDAO.getAllStockValue("Brand1");
 //    System.out.println(productDAO.getAllBrandValue("Brand1"));
-        System.out.println(productDAO.getAvgPrice());
+        System.out.println(productDAO.getAvgPrice()+"€ is the average price");
 
+        // Exo 4
+        // classes ajoutée
+
+        Picture picture1 = Picture.builder().url("https://.bidule.fr").build();
+        Picture picture2 = Picture.builder().url("https://.truc.com").build();
+//
+//                List<Picture> pictures = List.of(picture1,picture2);
+//
+//        for(Picture p : pictures){
+//            pictureDAO.save(p);
+//        }
+
+        Product productFound = productDAO.get(5);
+        Comment comment1 = Comment.builder().product(productFound).content("c'est de la merde").com_date(LocalDate.of(2025,06,02)).note(1).build();
+        productFound = productDAO.get(2);
+        Comment comment2 = Comment.builder().product(productFound).content("c'est trop bien").com_date(LocalDate.of(2025,05,23)).note(5).build();
+        productFound = productDAO.get(5);
+        Comment comment3 = Comment.builder().product(productFound).content("MOUAIS BOF").com_date(LocalDate.of(2024,12,12)).note(3).build();
+
+//        List<Comment> comments = List.of(comment1,comment2,comment3);
+//
+//        for(Comment p : comments){
+//            commentDAO.save(p);
+//        }
+
+        // je met ma requête SQL au moins, au cas ou je n'arrive pas a l'exprimer ici
+        // SELECT * FROM product JOIN comment ON product.id = comment.idProduct WHERE comment.note > 4;
+
+
+        System.out.println(productDAO.showProductNoteplus4()); // Caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: product is not mapped
 
     }
 
@@ -103,5 +142,20 @@ private static void searchWithPrice(){
     System.out.println(productDAO.getAllProductUnderTheStock(stockSearch));
     }
 
+    private static void showNotePlus4(){
+BaseDAO baseDAO = new BaseDAO() {
+    @Override
+    public List get() {
+        return List.of();
+    }
+
+    @Override
+    public List<Product> showProductNoteplus4() {
+        System.out.println(super.showProductNoteplus4());
+        return super.showProductNoteplus4();
+    }
+};
+
+    }
 
 }

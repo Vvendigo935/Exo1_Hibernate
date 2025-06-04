@@ -98,6 +98,8 @@ public class ProductDAO extends BaseDAO<Product> {
             session.close();
         }
 
+
+
     }
 
 
